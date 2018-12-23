@@ -7,54 +7,53 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestBubbleSort1(t *testing.T) {
-	input := []int{1, 5, 4, 3, 2}
-
-	expect := []int{1, 2, 3, 4, 5}
-
-	sort.BubbleSort(input)
-
-	assert.Equal(t, expect, input)
+type sortTestSet struct {
+	title  string
+	input  []int
+	expect []int
 }
 
-func TestBubbleSort2(t *testing.T) {
-	input := []int{5, -7, 4}
-
-	expect := []int{-7, 4, 5}
-
-	sort.BubbleSort(input)
-
-	assert.Equal(t, expect, input)
+var testSets = []sortTestSet{
+	// Test set 1
+	{
+		title:  "Test sort: 1, 5, 4, 3, 2",
+		input:  []int{1, 5, 4, 3, 2},
+		expect: []int{1, 2, 3, 4, 5},
+	},
+	{
+		title:  "Test sort: -5, -4, -100, 9, 0",
+		input:  []int{-5, -4, -100, 9, 0},
+		expect: []int{-100, -5, -4, 0, 9},
+	},
+	{
+		title:  "Test sort: 1",
+		input:  []int{1},
+		expect: []int{1},
+	},
+	{
+		title:  "Test sort: 3, 2, 0",
+		input:  []int{3, 2, 0},
+		expect: []int{0, 2, 3},
+	},
+	{
+		title:  "Test sort: 10, 10, 10, 10",
+		input:  []int{10, 10, 10, 10},
+		expect: []int{10, 10, 10, 10},
+	},
+	{
+		title:  "Test sort: nil",
+		input:  nil,
+		expect: nil,
+	},
 }
 
-func TestBubbleSort3(t *testing.T) {
-	input := []int{1}
-
-	expect := []int{1}
-
-	sort.BubbleSort(input)
-
-	assert.Equal(t, expect, input)
-}
-
-func TestBubbleSort4(t *testing.T) {
-	input := []int{1000, 1001, 1002, 1003}
-
-	expect := []int{1000, 1001, 1002, 1003}
-
-	sort.BubbleSort(input)
-
-	assert.Equal(t, expect, input)
-}
-
-func TestBubbleSort5(t *testing.T) {
-	var input []int
-	input = nil
-
-	var expect []int
-	expect = nil
-
-	sort.BubbleSort(input)
-
-	assert.Equal(t, expect, input)
+func TestSort(t *testing.T) {
+	t.Run("BubbleSort", func(t *testing.T) {
+		for _, ts := range testSets {
+			t.Run(ts.title, func(t *testing.T) {
+				sort.BubbleSort(ts.input)
+				assert.Equal(t, ts.expect, ts.input)
+			})
+		}
+	})
 }
