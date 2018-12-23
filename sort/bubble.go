@@ -2,13 +2,22 @@ package sort
 
 // BubbleSort !
 func BubbleSort(nums []int) {
-	for i := 0; i < len(nums)-1; i++ {
-		for j := i + 1; j < len(nums); j++ {
-			if nums[i] > nums[j] {
-				temp := nums[i]
-				nums[i] = nums[j]
-				nums[j] = temp
+
+	length := len(nums)
+
+	for i := 0; i < length-1; i++ {
+
+		isSwap := false
+
+		for j := 0; j < length-i-1; j++ {
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+				isSwap = true
 			}
+		}
+
+		if isSwap == false {
+			break
 		}
 	}
 }
