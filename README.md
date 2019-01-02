@@ -6,3 +6,4 @@ A simple porject for practicing algorithms.
 
 - Bubble sort
 - Insertion sort
+- Selection sort
