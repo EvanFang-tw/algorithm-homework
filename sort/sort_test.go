@@ -71,4 +71,14 @@ func TestSort(t *testing.T) {
 			})
 		}
 	})
+
+	t.Run("SelectionSort", func(t *testing.T) {
+		testSets := createTestSets()
+		for _, ts := range testSets {
+			t.Run(ts.title, func(t *testing.T) {
+				sort.SelectionSort(ts.input)
+				assert.Equal(t, ts.expect, ts.input)
+			})
+		}
+	})
 }
